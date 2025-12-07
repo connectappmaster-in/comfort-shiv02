@@ -58,16 +58,17 @@ const WhyChooseUs = () => {
                 key={i}
                 {...fadeInScale}
                 whileHover={{ 
-                  scale: 1.05,
-                  y: -8
+                  scale: 1.02,
+                  y: -4
                 }}
-                transition={{ duration: 0.3 }}
+                transition={{ duration: 0.2 }}
+                className="group"
               >
-                <Card className="text-center transition-all duration-300 flex flex-col items-center justify-center h-full p-3 md:p-7 hover:shadow-xl hover:bg-accent/50 border-2 hover:border-primary/20 min-h-[100px] md:min-h-[220px]">
+                <Card className="text-center transition-all duration-200 ease-out flex flex-col items-center justify-center h-full p-3 md:p-7 hover:shadow-xl hover:bg-accent/50 hover:scale-[1.02] border-2 hover:border-primary/20 min-h-[100px] md:min-h-[220px]">
                   {/* Icon */}
                   <div className="flex items-center justify-center mb-2 md:mb-4">
-                    <div className="w-8 h-8 md:w-14 md:h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
-                      <IconComponent className="w-5 h-5 md:w-9 md:h-9 text-primary" />
+                    <div className="w-9 h-9 md:w-[44px] md:h-[44px] rounded-2xl bg-primary/10 flex items-center justify-center transition-all duration-200 group-hover:bg-primary/20">
+                      <IconComponent className="w-5 h-5 md:w-[22px] md:h-[22px] text-primary" />
                     </div>
                   </div>
 

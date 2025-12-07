@@ -92,7 +92,7 @@ const Index = () => {
               <ul className="space-y-1.5 text-xs opacity-70">
                 {["Home", "Services", "AMC Plans", "About", "Gallery", "Contact"].map(link => (
                   <li key={link}>
-                    <a href={`#${link.toLowerCase().replace(' ', '-')}`} className="hover:opacity-100 hover:text-accent transition-all duration-200">
+                    <a href={`#${link.toLowerCase().replace(' ', '-')}`} className="link-hover hover:opacity-100 hover:text-accent transition-all duration-200">
                       {link}
                     </a>
                   </li>
