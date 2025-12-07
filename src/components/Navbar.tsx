@@ -20,53 +20,82 @@ const Navbar = () => {
   useEffect(() => {
     setActiveSection("home");
     const navbarHeight = 56;
-    const sectionIds = ["home", "services", "amc", "gallery", "about", "contact"];
+    
+    // Map section IDs to their nav items - service-details should highlight "services"
+    const sectionToNavMap: Record<string, string> = {
+      "home": "home",
+      "services": "services",
+      "service-details": "services", // Service Details highlights Services nav
+      "amc": "amc",
+      "gallery": "gallery",
+      "about": "about",
+      "faq": "about", // FAQ highlights About nav
+      "contact": "contact"
+    };
+    
+    // All section IDs on the page in order
+    const allSectionIds = ["home", "services", "service-details", "amc", "gallery", "about", "faq", "contact"];
     
     const calculateActiveSection = () => {
       const scrollTop = window.scrollY;
       const scrollHeight = document.documentElement.scrollHeight;
       const clientHeight = window.innerHeight;
       
+      // At the very top
       if (scrollTop < 100) {
         setActiveSection("home");
         return;
       }
       
+      // At the very bottom - highlight contact
       if (scrollHeight - scrollTop - clientHeight < 100) {
         setActiveSection("contact");
         return;
       }
       
-      let currentSection = "home";
-      let maxVisibility = 0;
+      // Find the section that is currently most visible or closest to top
+      let bestSection = "home";
+      let bestScore = -Infinity;
       
-      for (const sectionId of sectionIds) {
+      for (const sectionId of allSectionIds) {
         const element = document.getElementById(sectionId);
         if (!element) continue;
         
         const rect = element.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        const sectionTop = Math.max(rect.top - navbarHeight, 0);
-        const sectionBottom = Math.min(rect.bottom, viewportHeight);
-        const visibleHeight = Math.max(0, sectionBottom - sectionTop);
-        const isNearTop = rect.top <= navbarHeight + 150 && rect.top >= -rect.height + 100;
+        const sectionTop = rect.top - navbarHeight;
+        const sectionBottom = rect.bottom;
         
-        if (isNearTop && visibleHeight > 0) {
-          currentSection = sectionId;
-          break;
+        // Check if section is in viewport
+        if (sectionBottom < 0 || sectionTop > clientHeight) continue;
+        
+        // Score based on how close the section top is to the navbar
+        // Sections whose top is just below navbar get highest score
+        let score = 0;
+        
+        if (sectionTop <= 50 && sectionTop >= -rect.height + 100) {
+          // Section top is near or past the navbar - high priority
+          score = 1000 - Math.abs(sectionTop);
+        } else if (sectionTop > 0 && sectionTop < clientHeight / 2) {
+          // Section is visible in upper half of viewport
+          score = 500 - sectionTop;
+        } else {
+          // Section is visible but not near top
+          score = Math.max(0, sectionBottom);
         }
         
-        if (visibleHeight > maxVisibility) {
-          maxVisibility = visibleHeight;
-          currentSection = sectionId;
+        if (score > bestScore) {
+          bestScore = score;
+          bestSection = sectionId;
         }
       }
       
-      setActiveSection(currentSection);
+      // Map the detected section to its nav item
+      const navItem = sectionToNavMap[bestSection] || "home";
+      setActiveSection(navItem);
     };
 
     const initialTimeout = setTimeout(calculateActiveSection, 150);
-    window.addEventListener("scroll", calculateActiveSection);
+    window.addEventListener("scroll", calculateActiveSection, { passive: true });
 
     return () => {
       clearTimeout(initialTimeout);
