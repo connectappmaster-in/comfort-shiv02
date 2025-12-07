@@ -7,13 +7,6 @@ import {
 } from "@/components/ui/accordion";
 
 const FAQ = () => {
-  const fadeInUp = {
-    initial: { opacity: 0, y: 30 },
-    whileInView: { opacity: 1, y: 0 },
-    viewport: { once: true },
-    transition: { duration: 0.6 }
-  };
-
   const faqs = [
     {
       question: "How often should I service my AC?",
@@ -58,29 +51,41 @@ const FAQ = () => {
   ];
 
   return (
-    <section id="faq" className="py-5 md:py-20 bg-background">
-      <div className="container mx-auto px-2 md:px-4">
-        <motion.div {...fadeInUp} className="text-center mb-4 md:mb-12">
-          <h2 className="text-lg md:text-4xl font-bold mb-1.5 md:mb-4 text-foreground">
+    <section id="faq" className="py-[50px] bg-background" aria-labelledby="faq-heading">
+      <div className="container mx-auto px-4">
+        <motion.div 
+          className="text-center mb-6 md:mb-8"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3 }}
+        >
+          <h2 id="faq-heading" className="section-heading">
             Frequently Asked Questions
           </h2>
-          <p className="text-xs md:text-xl text-muted-foreground">
+          <p className="section-subheading">
             Everything you need to know about our AC services
           </p>
         </motion.div>
 
-        <motion.div {...fadeInUp} className="max-w-3xl mx-auto">
-          <Accordion type="single" collapsible className="space-y-1.5 md:space-y-4">
+        <motion.div 
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, delay: 0.1 }}
+        >
+          <Accordion type="single" collapsible className="space-y-2">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="bg-background border border-border rounded-lg px-2 md:px-6 data-[state=open]:bg-[#F8F9FA] transition-colors duration-300"
+                className="bg-card border border-border/60 rounded-xl px-4 md:px-6 data-[state=open]:bg-muted/30 transition-colors duration-200 hover:border-primary/30"
               >
-                <AccordionTrigger className="text-left text-xs md:text-base font-semibold text-foreground hover:text-primary py-2 md:py-4">
+                <AccordionTrigger className="text-left text-sm md:text-base font-semibold text-foreground hover:text-primary py-4">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-[10px] md:text-base text-muted-foreground pb-2 md:pb-4 border-t border-border/50 pt-1.5 md:pt-3">
+                <AccordionContent className="text-sm text-foreground pb-4 border-t border-border/50 pt-3">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

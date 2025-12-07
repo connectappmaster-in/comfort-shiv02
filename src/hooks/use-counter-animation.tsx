@@ -4,7 +4,7 @@ import { useRef } from 'react';
 
 export const useCounterAnimation = (
   endValue: number,
-  duration: number = 2000,
+  duration: number = 2500,
   startCounting: boolean = false
 ) => {
   const [count, setCount] = useState(0);
@@ -20,9 +20,9 @@ export const useCounterAnimation = (
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
 
-      // Easing function for smooth animation
-      const easeOutQuad = (t: number) => t * (2 - t);
-      const currentCount = Math.floor(easeOutQuad(progress) * endValue);
+      // Ease-out function for smooth animation
+      const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+      const currentCount = Math.floor(easeOut(progress) * endValue);
 
       setCount(currentCount);
 
@@ -48,7 +48,7 @@ export const useCounterAnimation = (
 export const AnimatedCounter = ({ 
   value, 
   suffix = "", 
-  duration = 2000,
+  duration = 2500,
   className = ""
 }: { 
   value: number; 

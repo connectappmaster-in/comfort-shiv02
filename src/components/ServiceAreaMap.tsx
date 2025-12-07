@@ -19,11 +19,11 @@ const ServiceAreaMap = () => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
     >
-      <Card className="p-5 md:p-6 bg-card border border-border/60">
+      <Card className="p-5 bg-card border border-border/60">
         <div className="flex items-center gap-2 mb-4">
-          <MapPin className="w-5 h-5 text-primary" />
+          <MapPin className="w-5 h-5 text-primary" aria-hidden="true" />
           <h3 className="text-lg md:text-xl font-bold text-foreground">
             Areas We Cover
           </h3>
@@ -56,7 +56,7 @@ const ServiceAreaMap = () => {
               transition={{ duration: 0.3, delay: index * 0.02 }}
               className="flex items-center gap-2 text-sm text-foreground"
             >
-              <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+              <div className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" aria-hidden="true" />
               {area}
             </motion.div>
           ))}
@@ -64,16 +64,17 @@ const ServiceAreaMap = () => {
 
         {/* Note */}
         <div className="bg-muted/50 rounded-lg p-3 border border-border/40">
-          <p className="text-xs md:text-sm text-muted-foreground mb-3">
+          <p className="text-sm text-foreground mb-3">
             If your area is not listed, please WhatsApp us – we may still be able to serve you.
           </p>
           <Button
             size="sm"
             variant="outline"
-            className="text-xs border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground"
+            className="text-xs border-primary/30 text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-200 hover:scale-[1.02]"
             onClick={() => window.open(createWhatsAppLink(), '_blank')}
+            aria-label="Check if we service your area via WhatsApp"
           >
-            <MessageCircle className="w-3 h-3 mr-1.5" />
+            <MessageCircle className="w-3 h-3 mr-1.5" aria-hidden="true" />
             Check My Area
           </Button>
         </div>

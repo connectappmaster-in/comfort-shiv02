@@ -6,7 +6,7 @@ import teamImage from "@/assets/team.jpg";
 const About = () => {
   const milestones = [
     { year: "2018", title: "Started Operations", desc: "Launched in Pune city" },
-    { year: "2019", title: "200+ Customers", desc: "Expanded coverage" },
+    { year: "2019", title: "100+ Customers", desc: "Expanded coverage" },
     { year: "2020", title: "GST Registered", desc: "Proper tax registration" },
     { year: "2021", title: "PCMC Expansion", desc: "Serving Pimpri-Chinchwad" },
     { year: "2023", title: "3,000+ Units", desc: "Major milestone" },
@@ -20,7 +20,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-8 md:py-12 bg-background">
+    <section id="about" className="py-[50px] bg-background">
       <div className="container mx-auto px-4">
         <div className="max-w-5xl mx-auto">
           
@@ -29,7 +29,7 @@ const About = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
           >
             <h2 className="section-heading">
               About <span className="text-primary">Comfort Technical Services</span>
@@ -45,7 +45,7 @@ const About = () => {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.3 }}
               className="space-y-3"
             >
               <h3 className="text-lg font-bold text-foreground">Our Story</h3>
@@ -63,11 +63,11 @@ const About = () => {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
+              transition={{ duration: 0.3, delay: 0.1 }}
             >
               <img 
                 src={teamImage} 
-                alt="Comfort Technical Services team" 
+                alt="Comfort Technical Services team providing professional AC maintenance" 
                 className="rounded-xl shadow-lg w-full h-48 md:h-56 object-cover"
                 loading="lazy"
               />
@@ -80,19 +80,19 @@ const About = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
           >
             <h3 className="text-lg font-bold text-center mb-5 text-foreground">Our Journey</h3>
 
             {/* Desktop Timeline - Horizontal */}
             <div className="hidden md:block relative max-w-4xl mx-auto">
-              <div className="absolute top-4 left-0 right-0 h-0.5 bg-border" />
+              <div className="absolute top-4 left-0 right-0 h-1 bg-border rounded-full" />
               <motion.div 
-                className="absolute top-4 left-0 h-0.5 bg-primary"
+                className="absolute top-4 left-0 h-1 bg-primary rounded-full"
                 initial={{ width: 0 }}
                 whileInView={{ width: "100%" }}
                 viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
               />
               
               <div className="grid grid-cols-6 gap-2">
@@ -105,10 +105,11 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: index * 0.08 }}
                   >
-                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold mx-auto mb-2 shadow-sm relative z-10">
+                    <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold mx-auto mb-2 shadow-md relative z-10">
                       {milestone.year.slice(2)}
                     </div>
-                    <h4 className="text-xs font-semibold text-foreground">{milestone.title}</h4>
+                    <p className="text-[10px] font-semibold text-primary mb-0.5">{milestone.year}</p>
+                    <h4 className="text-xs font-bold text-foreground">{milestone.title}</h4>
                     <p className="text-[10px] text-muted-foreground">{milestone.desc}</p>
                   </motion.div>
                 ))}
@@ -126,11 +127,12 @@ const About = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
                 >
-                  <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-[10px] font-bold flex-shrink-0 shadow-md">
                     {milestone.year.slice(2)}
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-foreground">{milestone.title}</p>
+                    <p className="text-[9px] font-semibold text-primary">{milestone.year}</p>
+                    <p className="text-xs font-bold text-foreground">{milestone.title}</p>
                     <p className="text-[10px] text-muted-foreground">{milestone.desc}</p>
                   </div>
                 </motion.div>
@@ -143,7 +145,7 @@ const About = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.3 }}
           >
             <h3 className="text-lg font-bold text-center mb-5 text-foreground">Our Core Values</h3>
 
@@ -158,7 +160,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
                   >
-                    <Card className="p-4 text-center h-full border border-border/60 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200">
+                    <Card className="p-5 text-center h-full border border-border/60 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200">
                       <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
                         <IconComponent className="w-5 h-5 text-primary" />
                       </div>

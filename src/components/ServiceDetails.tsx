@@ -90,16 +90,16 @@ const ServiceDetails = () => {
   ];
 
   return (
-    <section id="service-details" className="py-8 md:py-12 bg-muted/30">
+    <section id="service-details" className="py-[50px] bg-muted/30" aria-labelledby="service-details-heading">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-6 md:mb-8"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
         >
-          <h2 className="section-heading">Service Details</h2>
+          <h2 id="service-details-heading" className="section-heading">Service Details</h2>
           <p className="section-subheading">What you can expect when you book</p>
         </motion.div>
 
@@ -116,17 +116,17 @@ const ServiceDetails = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <div className={`p-4 md:p-5 rounded-lg border-l-4 border-primary ${isEven ? 'bg-card' : 'bg-muted/50'} shadow-card h-full`}>
+                <div className={`p-5 rounded-xl border-l-4 border-primary ${isEven ? 'bg-card' : 'bg-muted/50'} shadow-card h-full`}>
                   <div className="flex items-center gap-3 mb-3">
                     <div className={`w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center`}>
-                      <IconComponent className={`w-4 h-4 ${service.iconColor}`} />
+                      <IconComponent className={`w-4 h-4 ${service.iconColor}`} aria-hidden="true" />
                     </div>
                     <h3 className="text-lg font-bold text-foreground">{service.name}</h3>
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+                  <p className="text-sm text-foreground mb-3 leading-relaxed">
                     {service.description}
                   </p>
 
@@ -134,17 +134,17 @@ const ServiceDetails = () => {
                     <h4 className="text-xs font-semibold text-foreground mb-2 uppercase tracking-wide">
                       What's Included
                     </h4>
-                    <ul className="grid grid-cols-2 gap-x-2 gap-y-1">
+                    <ul className="grid grid-cols-2 gap-x-2 gap-y-1.5">
                       {service.inclusions.map((item, j) => (
-                        <li key={j} className="flex items-start text-xs text-muted-foreground">
-                          <CheckCircle className="w-3.5 h-3.5 mr-1.5 flex-shrink-0 mt-0.5 text-primary" />
+                        <li key={j} className="flex items-start text-sm text-foreground">
+                          <CheckCircle className="w-3.5 h-3.5 mr-1.5 flex-shrink-0 mt-0.5 text-primary" aria-hidden="true" />
                           <span>{item}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <p className="text-[10px] text-muted-foreground/70 italic mt-3 pt-2 border-t border-border/50">
+                  <p className="text-xs text-muted-foreground italic mt-3 pt-2 border-t border-border/50">
                     Spare parts and major repairs charged separately after approval.
                   </p>
                 </div>
