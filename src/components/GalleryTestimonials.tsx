@@ -10,10 +10,10 @@ import acBeforeAfter from "@/assets/ac-before-after.jpg";
 
 const GalleryTestimonials = () => {
   const gallery = [
-    { src: acCleaning, alt: "AC deep cleaning", label: "Deep Cleaning" },
-    { src: acInstallation, alt: "AC installation", label: "Installation" },
-    { src: acGasCheck, alt: "Gas refill", label: "Gas Refill" },
-    { src: acBeforeAfter, alt: "Before & after", label: "Before/After" }
+    { src: acCleaning, alt: "Professional AC deep cleaning service in Pune", label: "Deep Cleaning" },
+    { src: acInstallation, alt: "Expert AC installation by certified technicians", label: "Installation" },
+    { src: acGasCheck, alt: "AC gas refill and leak detection service", label: "Gas Refill" },
+    { src: acBeforeAfter, alt: "Before and after AC cleaning results", label: "Before/After" }
   ];
 
   const testimonials = [
@@ -40,12 +40,12 @@ const GalleryTestimonials = () => {
   const stats = [
     { value: 7, suffix: "+", label: "Years" },
     { value: 3000, suffix: "+", label: "AC Units" },
-    { value: 150, suffix: "+", label: "Reviews" },
-    { value: 4.8, suffix: "/5", label: "Rating", isDecimal: true }
+    { value: 57, suffix: "+", label: "Reviews" },
+    { value: 5, suffix: "/5", label: "Rating" }
   ];
 
   return (
-    <section id="gallery" className="py-8 md:py-12 bg-muted/50">
+    <section id="gallery" className="py-[50px] bg-muted/50">
       <div className="container mx-auto px-4">
         {/* Gallery Section */}
         <motion.div 
@@ -53,7 +53,7 @@ const GalleryTestimonials = () => {
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
         >
           <h2 className="section-heading">Our Work</h2>
           <p className="text-xs md:text-sm text-muted-foreground">
@@ -68,8 +68,8 @@ const GalleryTestimonials = () => {
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.08 }}
-              className="relative overflow-hidden rounded-lg border border-border/50 aspect-[4/3] group cursor-pointer"
+              transition={{ duration: 0.3, delay: index * 0.08 }}
+              className="relative overflow-hidden rounded-xl border border-border/50 aspect-[4/3] group cursor-pointer"
             >
               <img 
                 src={img.src} 
@@ -91,7 +91,7 @@ const GalleryTestimonials = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="relative bg-card border border-border/60 rounded-xl p-4 md:p-5 text-center group hover:border-primary/40 hover:shadow-card-hover transition-all duration-200"
+              className="relative bg-card border border-border/60 rounded-xl p-5 text-center group hover:border-primary/40 hover:shadow-card-hover transition-all duration-200"
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -100,13 +100,9 @@ const GalleryTestimonials = () => {
               <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
               <div className="relative">
                 <div className="text-2xl md:text-3xl font-bold text-primary mb-1">
-                  {stat.isDecimal ? (
-                    <span>{stat.value}{stat.suffix}</span>
-                  ) : (
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={1500} />
-                  )}
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={2500} />
                 </div>
-                <p className="text-xs md:text-sm text-muted-foreground font-medium">{stat.label}</p>
+                <p className="text-xs md:text-sm text-foreground font-medium">{stat.label}</p>
               </div>
             </motion.div>
           ))}
@@ -114,11 +110,11 @@ const GalleryTestimonials = () => {
 
         {/* Testimonials */}
         <motion.div 
-          className="bg-card rounded-xl p-4 md:p-6 shadow-card"
+          className="bg-card rounded-xl p-5 md:p-6 shadow-card"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
         >
           <h3 className="text-lg md:text-xl font-bold text-center mb-6 text-foreground">
             What Our Customers Say
@@ -131,18 +127,18 @@ const GalleryTestimonials = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
               >
-                <Card className="p-4 h-full border border-border/60 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 relative">
-                  <Quote className="absolute top-3 right-3 w-6 h-6 text-primary/10" />
+                <Card className="p-5 h-full border border-border/60 hover:border-primary/30 hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 relative">
+                  <Quote className="absolute top-3 right-3 w-6 h-6 text-primary/10" aria-hidden="true" />
                   
-                  <div className="flex gap-0.5 mb-2">
+                  <div className="flex gap-0.5 mb-2" aria-label="5 out of 5 stars">
                     {[...Array(5)].map((_, j) => (
-                      <Star key={j} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                      <Star key={j} className="w-3.5 h-3.5 text-amber-400 fill-amber-400" aria-hidden="true" />
                     ))}
                   </div>
 
-                  <p className="text-sm text-muted-foreground mb-3 leading-relaxed">
+                  <p className="text-sm text-foreground mb-3 leading-relaxed">
                     "{testimonial.text}"
                   </p>
 
@@ -162,15 +158,16 @@ const GalleryTestimonials = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.3 }}
+            transition={{ duration: 0.3, delay: 0.3 }}
           >
             <Button 
               variant="outline"
               size="sm"
-              className="group"
+              className="group hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-200"
               onClick={() => window.open('https://share.google/XSCTACp1FdcN3VrHi', '_blank')}
+              aria-label="See more reviews on Google"
             >
-              <ExternalLink className="w-3.5 h-3.5 mr-1.5 group-hover:translate-x-0.5 transition-transform" />
+              <ExternalLink className="w-3.5 h-3.5 mr-1.5 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
               See more on Google
             </Button>
           </motion.div>

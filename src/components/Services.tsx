@@ -11,7 +11,7 @@ const Services = () => {
       desc: ["Filter cleaning & wash", "Coil inspection", "Refrigerant check"],
       price: "₹399",
       icon: Wrench,
-      bgTint: "bg-blue-50"
+      bgTint: "bg-blue-50 dark:bg-blue-950/30"
     },
     {
       id: "deep-cleaning",
@@ -20,7 +20,7 @@ const Services = () => {
       desc: ["Internal cleaning", "Coil sanitization", "Anti-bacterial treatment"],
       price: "₹599",
       icon: Sparkles,
-      bgTint: "bg-cyan-50"
+      bgTint: "bg-cyan-50 dark:bg-cyan-950/30"
     },
     {
       id: "gas-refill",
@@ -29,7 +29,7 @@ const Services = () => {
       desc: ["Leak detection", "R32/R410A refill", "Pressure testing"],
       price: "₹2,500",
       icon: Wind,
-      bgTint: "bg-teal-50"
+      bgTint: "bg-teal-50 dark:bg-teal-950/30"
     },
     {
       id: "ac-repair",
@@ -38,7 +38,7 @@ const Services = () => {
       desc: ["Compressor troubleshooting", "PCB repairs", "All brands"],
       price: "Based on issue",
       icon: Hammer,
-      bgTint: "bg-amber-50"
+      bgTint: "bg-amber-50 dark:bg-amber-950/30"
     },
     {
       id: "ac-installation",
@@ -47,7 +47,7 @@ const Services = () => {
       desc: ["Professional mounting", "Copper piping", "Gas charging"],
       price: "₹1,500",
       icon: Settings,
-      bgTint: "bg-purple-50"
+      bgTint: "bg-purple-50 dark:bg-purple-950/30"
     },
     {
       id: "amc-plans",
@@ -56,7 +56,7 @@ const Services = () => {
       desc: ["Scheduled maintenance", "Priority calls", "Discounted repairs"],
       price: "Custom",
       icon: FileText,
-      bgTint: "bg-green-50"
+      bgTint: "bg-green-50 dark:bg-green-950/30"
     }
   ];
 
@@ -68,16 +68,16 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="py-8 md:py-12 bg-background">
+    <section id="services" className="py-[50px] bg-background" aria-labelledby="services-heading">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-6 md:mb-8"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
         >
-          <h2 className="section-heading">Our Services</h2>
+          <h2 id="services-heading" className="section-heading">Our Services</h2>
           <p className="section-subheading">Comprehensive AC solutions for Pune & PCMC</p>
         </motion.div>
 
@@ -91,15 +91,19 @@ const Services = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.08 }}
+                transition={{ duration: 0.3, delay: index * 0.08 }}
               >
                 <Card 
-                  className={`p-4 h-full flex flex-col service-card group cursor-pointer ${service.bgTint}`}
+                  className={`p-5 h-full flex flex-col service-card group cursor-pointer ${service.bgTint}`}
                   onClick={() => scrollToDetail(service.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && scrollToDetail(service.id)}
+                  aria-label={`View details for ${service.name}`}
                 >
                   <div className="flex items-start gap-3 mb-3">
                     <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-all duration-200">
-                      <IconComponent className="w-[22px] h-[22px] text-primary" />
+                      <IconComponent className="w-[22px] h-[22px] text-primary" aria-hidden="true" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
@@ -116,16 +120,16 @@ const Services = () => {
 
                   <ul className="space-y-1.5 mb-3 flex-grow">
                     {service.desc.map((point, j) => (
-                      <li key={j} className="flex items-start text-xs text-muted-foreground">
-                        <CheckCircle className="w-3.5 h-3.5 mr-1.5 flex-shrink-0 mt-0.5 text-primary" />
+                      <li key={j} className="flex items-start text-sm text-foreground">
+                        <CheckCircle className="w-3.5 h-3.5 mr-1.5 flex-shrink-0 mt-0.5 text-primary" aria-hidden="true" />
                         <span>{point}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <button className="text-xs font-semibold text-primary flex items-center gap-1 group/link mt-auto">
+                  <button className="text-xs font-semibold text-primary flex items-center gap-1 group/link mt-auto underline-animate">
                     Learn More 
-                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" />
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/link:translate-x-1" aria-hidden="true" />
                   </button>
                 </Card>
               </motion.div>

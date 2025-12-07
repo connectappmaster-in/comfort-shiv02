@@ -48,16 +48,16 @@ const AMCPlans = () => {
   ];
 
   return (
-    <section id="amc" className="py-8 md:py-12 bg-background">
+    <section id="amc" className="py-[50px] bg-background" aria-labelledby="amc-heading">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-6 md:mb-8"
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.3 }}
         >
-          <h2 className="section-heading">AMC Plans</h2>
+          <h2 id="amc-heading" className="section-heading">AMC Plans</h2>
           <p className="section-subheading">Annual Maintenance Contracts for worry-free AC care</p>
         </motion.div>
 
@@ -70,13 +70,13 @@ const AMCPlans = () => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
               >
                 <Card 
-                  className={`p-4 md:p-5 h-full flex flex-col relative transition-all duration-300 hover:-translate-y-1 hover:rotate-[0.5deg] ${
+                  className={`p-5 h-full flex flex-col relative transition-all duration-200 hover:-translate-y-1 ${
                     plan.popular 
                       ? 'border-2 border-primary shadow-[0_0_20px_hsl(210_100%_40%/0.15)] bg-primary/5' 
-                      : 'border border-border/60 hover:shadow-card-hover'
+                      : 'border border-border/60 hover:shadow-card-hover hover:border-primary/30'
                   }`}
                 >
                   {plan.popular && (
@@ -87,7 +87,7 @@ const AMCPlans = () => {
 
                   <div className="flex items-center gap-2 mb-3">
                     <div className="w-8 h-8 rounded-md bg-primary/10 flex items-center justify-center">
-                      <IconComponent className="w-4 h-4 text-primary" />
+                      <IconComponent className="w-4 h-4 text-primary" aria-hidden="true" />
                     </div>
                     <h3 className="text-base font-bold text-foreground">{plan.name}</h3>
                   </div>
@@ -97,13 +97,13 @@ const AMCPlans = () => {
                     <span className="text-sm text-muted-foreground">{plan.priceLabel}</span>
                   </div>
 
-                  <p className="text-xs font-medium text-primary/80 mb-1">{plan.visits}</p>
-                  <p className="text-xs text-muted-foreground mb-3 pb-3 border-b border-border/50">{plan.forWhom}</p>
+                  <p className="text-xs font-semibold text-primary mb-1">{plan.visits}</p>
+                  <p className="text-sm text-foreground mb-3 pb-3 border-b border-border/50">{plan.forWhom}</p>
 
-                  <ul className="space-y-1.5 mb-4 flex-grow">
+                  <ul className="space-y-2 mb-4 flex-grow">
                     {plan.includes.map((item, j) => (
-                      <li key={j} className="flex items-start text-xs text-muted-foreground">
-                        <CheckCircle className="w-3.5 h-3.5 text-primary mr-1.5 flex-shrink-0 mt-0.5" />
+                      <li key={j} className="flex items-start text-sm text-foreground">
+                        <CheckCircle className="w-3.5 h-3.5 text-primary mr-1.5 flex-shrink-0 mt-0.5" aria-hidden="true" />
                         {item}
                       </li>
                     ))}
@@ -111,11 +111,12 @@ const AMCPlans = () => {
 
                   <Button 
                     size="sm"
-                    className={`w-full mt-auto ${plan.popular ? '' : 'variant-outline'}`}
+                    className={`w-full mt-auto transition-all duration-200 hover:scale-[1.02] hover:shadow-lg ${plan.popular ? '' : ''}`}
                     variant={plan.popular ? "default" : "outline"}
                     onClick={() => handlePlanClick(plan.name)}
+                    aria-label={`Get ${plan.name} via WhatsApp`}
                   >
-                    <MessageCircle className="w-3.5 h-3.5 mr-1.5" />
+                    <MessageCircle className="w-3.5 h-3.5 mr-1.5" aria-hidden="true" />
                     Get This Plan
                   </Button>
                 </Card>
@@ -125,11 +126,11 @@ const AMCPlans = () => {
         </div>
 
         <motion.p 
-          className="text-center text-[10px] md:text-xs text-muted-foreground/70 mt-6 max-w-xl mx-auto"
+          className="text-center text-xs text-muted-foreground mt-6 max-w-xl mx-auto"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.4 }}
+          transition={{ duration: 0.3, delay: 0.4 }}
         >
           Spare parts and major repairs are charged separately after your approval.
         </motion.p>

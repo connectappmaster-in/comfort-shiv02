@@ -18,12 +18,13 @@
     --primary: 210 100% 40%;
     --primary-foreground: 0 0% 100%;
     --primary-dark: 210 100% 30%;
+    --primary-vibrant: 210 100% 45%;
 
     --secondary: 215 20% 20%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 210 15% 92%;
-    --muted-foreground: 215 15% 45%;
+    --muted-foreground: 215 15% 35%;
 
     --accent: 185 70% 45%;
     --accent-foreground: 0 0% 100%;
@@ -43,6 +44,11 @@
 
     --radius: 0.5rem;
 
+    /* Text colors for WCAG compliance */
+    --text-primary: 215 25% 10%;
+    --text-secondary: 215 15% 35%;
+    --text-muted: 215 15% 45%;
+
     /* Spacing scale */
     --space-xs: 4px;
     --space-sm: 8px;
@@ -51,9 +57,9 @@
     --space-xl: 32px;
     --space-2xl: 48px;
 
-    /* Section spacing - compact */
-    --section-py: 32px;
-    --section-py-md: 48px;
+    /* Section spacing */
+    --section-py: 50px;
+    --section-py-md: 50px;
     --section-gap: 32px;
 
     /* Shadows */
@@ -61,6 +67,7 @@
     --shadow-card-hover: 0 8px 24px hsl(210 20% 50% / 0.15);
     --shadow-soft: 0 4px 16px hsl(210 20% 50% / 0.1);
     --shadow-navbar: 0 2px 12px hsl(210 20% 50% / 0.1);
+    --shadow-button-hover: 0 4px 12px hsl(0 0% 0% / 0.15);
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(210, 100%, 40%), hsl(210, 100%, 30%));
@@ -101,6 +108,7 @@
     --primary: 200 90% 55%;
     --primary-foreground: 215 25% 10%;
     --primary-dark: 200 90% 45%;
+    --primary-vibrant: 200 90% 60%;
 
     --secondary: 210 15% 85%;
     --secondary-foreground: 215 25% 10%;
@@ -123,6 +131,10 @@
     --border: 215 20% 25%;
     --input: 215 20% 25%;
     --ring: 200 90% 55%;
+
+    --text-primary: 210 20% 95%;
+    --text-secondary: 210 15% 75%;
+    --text-muted: 210 15% 65%;
 
     --shadow-card: 0 2px 8px hsl(0 0% 0% / 0.2);
     --shadow-card-hover: 0 8px 24px hsl(0 0% 0% / 0.3);
@@ -153,16 +165,28 @@
   h1, h2, h3, h4, h5, h6 {
     line-height: 1.25;
     font-weight: 700;
+    color: hsl(var(--foreground));
   }
 
   p {
     line-height: 1.5;
   }
+
+  /* Focus indicators for accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Ensure all interactive elements have pointer cursor */
+  button, a, [role="button"] {
+    cursor: pointer;
+  }
 }
 
 @layer utilities {
   .section-compact {
-    @apply py-8 md:py-12;
+    @apply py-[50px];
   }
 
   .card-shadow {
@@ -227,9 +251,18 @@
 
   /* Mobile tap targets */
   @media (max-width: 768px) {
-    button, a {
+    button, a, [role="button"] {
       min-height: 44px;
     }
+  }
+
+  /* WCAG compliant text colors */
+  .text-dark {
+    color: hsl(215 25% 10%);
+  }
+
+  .text-body {
+    color: hsl(215 15% 35%);
   }
 }
 
@@ -255,12 +288,13 @@
   }
 
   .service-card {
-    @apply p-4 border border-border/60 rounded-lg bg-card transition-all duration-200 ease-out;
+    @apply p-5 border border-border/60 rounded-xl bg-card transition-all duration-200 ease-out;
     box-shadow: var(--shadow-card);
   }
 
   .service-card:hover {
-    @apply border-primary/30 scale-[1.02];
+    @apply border-primary/30;
+    transform: translateY(-2px) scale(1.02);
     box-shadow: var(--shadow-card-hover);
   }
 
@@ -274,7 +308,7 @@
 
   /* Link hover animation */
   .link-hover {
-    @apply relative inline-block;
+    @apply relative inline-block transition-colors duration-200;
   }
 
   .link-hover::after {
@@ -286,12 +320,41 @@
     @apply w-full;
   }
 
+  .link-hover:hover {
+    color: hsl(var(--primary));
+  }
+
   /* Premium card hover */
   .card-hover {
     @apply transition-all duration-200 ease-out;
   }
 
   .card-hover:hover {
-    @apply scale-[1.02] shadow-card-hover;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Button hover improvements */
+  .btn-hover {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .btn-hover:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: var(--shadow-button-hover);
+  }
+
+  /* Image styling */
+  .img-rounded {
+    @apply rounded-xl;
+  }
+
+  /* Form input focus styles */
+  .input-focus {
+    @apply focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200;
+  }
+
+  .input-focus:hover {
+    @apply bg-muted/30;
   }
 }
