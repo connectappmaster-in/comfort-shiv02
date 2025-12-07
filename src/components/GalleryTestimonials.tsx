@@ -47,81 +47,75 @@ const GalleryTestimonials = () => {
   return (
     <section id="gallery" className="py-8 md:py-12 bg-muted/50">
       <div className="container mx-auto px-4">
-        {/* Gallery + Stats Row */}
-        <div className="grid lg:grid-cols-3 gap-6 mb-8 md:mb-10">
-          {/* Gallery */}
-          <div className="lg:col-span-2">
-            <motion.div 
-              className="mb-4"
+        {/* Gallery Section */}
+        <motion.div 
+          className="mb-4"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="section-heading">Our Work</h2>
+          <p className="text-xs md:text-sm text-muted-foreground">
+            Actual photos from our jobs in Pune & PCMC
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 mb-6">
+          {gallery.map((img, index) => (
+            <motion.div
+              key={index}
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className="relative overflow-hidden rounded-lg border border-border/50 aspect-[4/3] group cursor-pointer"
             >
-              <h2 className="section-heading">Our Work</h2>
-              <p className="text-xs md:text-sm text-muted-foreground">
-                Actual photos from our jobs in Pune & PCMC
-              </p>
+              <img 
+                src={img.src} 
+                alt={img.alt} 
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-300 flex items-center justify-center">
+                <span className="text-primary-foreground text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                  {img.label}
+                </span>
+              </div>
             </motion.div>
-
-            <div className="grid grid-cols-2 gap-2">
-              {gallery.map((img, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className="relative overflow-hidden rounded-lg border border-border/50 aspect-[4/3] group cursor-pointer"
-                >
-                  <img 
-                    src={img.src} 
-                    alt={img.alt} 
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-all duration-300 flex items-center justify-center">
-                    <span className="text-primary-foreground text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                      {img.label}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Stats */}
-          <motion.div 
-            className="rounded-xl p-4 md:p-6 bg-gradient-stats text-primary-foreground flex flex-col justify-center"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-lg font-bold mb-4 text-center">Our Numbers</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  className="text-center"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                >
-                  <div className="text-2xl md:text-3xl font-bold">
-                    {stat.isDecimal ? (
-                      <span>{stat.value}{stat.suffix}</span>
-                    ) : (
-                      <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={1500} />
-                    )}
-                  </div>
-                  <p className="text-xs opacity-90">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          ))}
         </div>
+
+        {/* Stats Strip - Below Gallery */}
+        <motion.div 
+          className="rounded-xl p-4 md:p-6 bg-gradient-stats text-primary-foreground mb-8 md:mb-10"
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                className="text-center py-2"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+              >
+                <div className="text-3xl md:text-4xl font-bold mb-1">
+                  {stat.isDecimal ? (
+                    <span>{stat.value}{stat.suffix}</span>
+                  ) : (
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={1500} />
+                  )}
+                </div>
+                <p className="text-xs md:text-sm opacity-90 font-medium">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* Testimonials */}
         <motion.div 
