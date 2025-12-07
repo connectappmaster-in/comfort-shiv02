@@ -39,7 +39,7 @@ const GalleryTestimonials = () => {
 
   const stats = [
     { value: 7, suffix: "+", label: "Years" },
-    { value: 10000, suffix: "+", label: "AC Units" },
+    { value: 3000, suffix: "+", label: "AC Units" },
     { value: 150, suffix: "+", label: "Reviews" },
     { value: 4.8, suffix: "/5", label: "Rating", isDecimal: true }
   ];
