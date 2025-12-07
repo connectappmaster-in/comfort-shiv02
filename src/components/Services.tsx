@@ -98,8 +98,8 @@ const Services = () => {
                   onClick={() => scrollToDetail(service.id)}
                 >
                   <div className="flex items-start gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                      <IconComponent className="w-5 h-5 text-primary" />
+                    <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-all duration-200">
+                      <IconComponent className="w-[22px] h-[22px] text-primary" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors">
