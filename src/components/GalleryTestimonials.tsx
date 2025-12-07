@@ -87,35 +87,30 @@ const GalleryTestimonials = () => {
         </div>
 
         {/* Stats Strip - Below Gallery */}
-        <motion.div 
-          className="rounded-xl p-4 md:p-6 bg-gradient-stats text-primary-foreground mb-8 md:mb-10"
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="text-center py-2"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                <div className="text-3xl md:text-4xl font-bold mb-1">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              className="relative bg-card border border-border/60 rounded-xl p-4 md:p-5 text-center group hover:border-primary/40 hover:shadow-card-hover transition-all duration-200"
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: index * 0.08 }}
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              <div className="relative">
+                <div className="text-2xl md:text-3xl font-bold text-primary mb-1">
                   {stat.isDecimal ? (
                     <span>{stat.value}{stat.suffix}</span>
                   ) : (
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={1500} />
                   )}
                 </div>
-                <p className="text-xs md:text-sm opacity-90 font-medium">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+                <p className="text-xs md:text-sm text-muted-foreground font-medium">{stat.label}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
         {/* Testimonials */}
         <motion.div 
