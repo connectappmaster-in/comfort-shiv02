@@ -6,10 +6,10 @@ import teamImage from "@/assets/team.jpg";
 const About = () => {
   const milestones = [
     { year: "2018", title: "Started Operations", desc: "Launched in Pune city" },
-    { year: "2019", title: "500+ Customers", desc: "Expanded coverage" },
+    { year: "2019", title: "200+ Customers", desc: "Expanded coverage" },
     { year: "2020", title: "GST Registered", desc: "Proper tax registration" },
     { year: "2021", title: "PCMC Expansion", desc: "Serving Pimpri-Chinchwad" },
-    { year: "2023", title: "10,000+ Units", desc: "Major milestone" },
+    { year: "2023", title: "3,000+ Units", desc: "Major milestone" },
     { year: "2024", title: "AMC Launch", desc: "Maintenance contracts" }
   ];
 
@@ -51,7 +51,7 @@ const About = () => {
               <h3 className="text-lg font-bold text-foreground">Our Story</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 We've been providing AC services in Pune and PCMC since 2018. 
-                Started as a small team, now serviced 10,000+ units across homes, shops, and offices.
+                Started as a small team, now serviced 3,000+ units across homes, shops, and offices.
               </p>
               <p className="text-sm text-muted-foreground leading-relaxed">
                 Expect on-time arrival, neat work, clear communication, and fair pricing with no surprises. 
