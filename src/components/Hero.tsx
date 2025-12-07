@@ -67,7 +67,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              7+ years • 10,000+ AC units • GSTIN: 27HEKPS5234F1Z4
+              7+ years • 3,000+ AC units • GSTIN: 27HEKPS5234F1Z4
             </motion.div>
 
             {/* Feature Points - Compact Grid */}
