@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,100 +9,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    setActiveSection("home");
-    const navbarHeight = 56;
-    
-    // Map section IDs to their nav items - service-details should highlight "services"
-    const sectionToNavMap: Record<string, string> = {
-      "home": "home",
-      "services": "services",
-      "service-details": "services", // Service Details highlights Services nav
-      "amc": "amc",
-      "gallery": "gallery",
-      "about": "about",
-      "faq": "about", // FAQ highlights About nav
-      "contact": "contact"
-    };
-    
-    // All section IDs on the page in order
-    const allSectionIds = ["home", "services", "service-details", "amc", "gallery", "about", "faq", "contact"];
-    
-    const calculateActiveSection = () => {
-      const scrollTop = window.scrollY;
-      const scrollHeight = document.documentElement.scrollHeight;
-      const clientHeight = window.innerHeight;
-      
-      // At the very top
-      if (scrollTop < 100) {
-        setActiveSection("home");
-        return;
-      }
-      
-      // At the very bottom - highlight contact
-      if (scrollHeight - scrollTop - clientHeight < 100) {
-        setActiveSection("contact");
-        return;
-      }
-      
-      // Find the section that is currently most visible or closest to top
-      let bestSection = "home";
-      let bestScore = -Infinity;
-      
-      for (const sectionId of allSectionIds) {
-        const element = document.getElementById(sectionId);
-        if (!element) continue;
-        
-        const rect = element.getBoundingClientRect();
-        const sectionTop = rect.top - navbarHeight;
-        const sectionBottom = rect.bottom;
-        
-        // Check if section is in viewport
-        if (sectionBottom < 0 || sectionTop > clientHeight) continue;
-        
-        // Score based on how close the section top is to the navbar
-        // Sections whose top is just below navbar get highest score
-        let score = 0;
-        
-        if (sectionTop <= 50 && sectionTop >= -rect.height + 100) {
-          // Section top is near or past the navbar - high priority
-          score = 1000 - Math.abs(sectionTop);
-        } else if (sectionTop > 0 && sectionTop < clientHeight / 2) {
-          // Section is visible in upper half of viewport
-          score = 500 - sectionTop;
-        } else {
-          // Section is visible but not near top
-          score = Math.max(0, sectionBottom);
-        }
-        
-        if (score > bestScore) {
-          bestScore = score;
-          bestSection = sectionId;
-        }
-      }
-      
-      // Map the detected section to its nav item
-      const navItem = sectionToNavMap[bestSection] || "home";
-      setActiveSection(navItem);
-    };
-
-    const initialTimeout = setTimeout(calculateActiveSection, 150);
-    window.addEventListener("scroll", calculateActiveSection, { passive: true });
-
-    return () => {
-      clearTimeout(initialTimeout);
-      window.removeEventListener("scroll", calculateActiveSection);
-    };
-  }, []);
-
+  // Navigation items in order
   const navItems = [
     { name: "Home", href: "#home" },
     { name: "Services", href: "#services" },
@@ -111,6 +18,69 @@ const Navbar = () => {
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" }
   ];
+
+  // All section IDs in page order, mapped to their nav item
+  const sectionMapping = [
+    { id: "home", nav: "home" },
+    { id: "services", nav: "services" },
+    { id: "service-details", nav: "services" },
+    { id: "amc", nav: "amc" },
+    { id: "gallery", nav: "gallery" },
+    { id: "about", nav: "about" },
+    { id: "faq", nav: "about" },
+    { id: "contact", nav: "contact" }
+  ];
+
+  const calculateActiveSection = useCallback(() => {
+    const navbarHeight = 56;
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.documentElement.scrollHeight;
+    const clientHeight = window.innerHeight;
+    
+    // At very top - highlight Home
+    if (scrollTop < 50) {
+      setActiveSection("home");
+      return;
+    }
+    
+    // At very bottom - highlight Contact
+    if (scrollHeight - scrollTop - clientHeight < 50) {
+      setActiveSection("contact");
+      return;
+    }
+    
+    // Find which section is currently at/near the top of viewport
+    let activeNav = "home";
+    
+    for (const section of sectionMapping) {
+      const element = document.getElementById(section.id);
+      if (!element) continue;
+      
+      const rect = element.getBoundingClientRect();
+      const sectionTop = rect.top - navbarHeight;
+      
+      // If section top is above or at the viewport top (with some buffer)
+      // This section is the current one
+      if (sectionTop <= 100) {
+        activeNav = section.nav;
+      }
+    }
+    
+    setActiveSection(activeNav);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+      calculateActiveSection();
+    };
+    
+    // Initial calculation
+    handleScroll();
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [calculateActiveSection]);
 
   const scrollToSection = (href: string) => {
     setIsOpen(false);
