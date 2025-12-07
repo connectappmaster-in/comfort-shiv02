@@ -14,14 +14,11 @@ import HowItWorks from "@/components/HowItWorks";
 import AMCPlans from "@/components/AMCPlans";
 import GalleryTestimonials from "@/components/GalleryTestimonials";
 import MultiStepBookingForm from "@/components/MultiStepBookingForm";
-
 const Index = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-
-  return (
-    <div className="min-h-screen bg-background pt-14">
+  return <div className="min-h-screen bg-background pt-14">
       <Navbar />
       <Hero />
       <Services />
@@ -35,12 +32,17 @@ const Index = () => {
       <section className="py-6 md:py-10 bg-muted/30">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-4 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
+            <motion.div initial={{
+            opacity: 0,
+            x: -20
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.5
+          }}>
               <Card className="p-4 md:p-5 h-full border shadow-card">
                 <h2 className="text-lg md:text-xl font-bold mb-1 text-foreground">Service Coverage</h2>
                 <p className="text-xs text-muted-foreground mb-4">Pune & PCMC areas</p>
@@ -48,12 +50,18 @@ const Index = () => {
               </Card>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
+            <motion.div initial={{
+            opacity: 0,
+            x: 20
+          }} whileInView={{
+            opacity: 1,
+            x: 0
+          }} viewport={{
+            once: true
+          }} transition={{
+            duration: 0.5,
+            delay: 0.1
+          }}>
               <Card className="p-4 md:p-5 h-full border shadow-card bg-gradient-to-br from-primary/5 to-transparent">
                 <h2 className="text-lg md:text-xl font-bold mb-1 text-foreground">Book Your Service</h2>
                 <p className="text-xs text-muted-foreground mb-4">Quick booking - we'll contact you</p>
@@ -90,13 +98,11 @@ const Index = () => {
             <div>
               <h4 className="text-sm font-bold mb-3 opacity-90">Quick Links</h4>
               <ul className="space-y-1.5 text-xs opacity-70">
-                {["Home", "Services", "AMC Plans", "About", "Gallery", "Contact"].map(link => (
-                  <li key={link}>
+                {["Home", "Services", "AMC Plans", "About", "Gallery", "Contact"].map(link => <li key={link}>
                     <a href={`#${link.toLowerCase().replace(' ', '-')}`} className="link-hover hover:opacity-100 hover:text-accent transition-all duration-200">
                       {link}
                     </a>
-                  </li>
-                ))}
+                  </li>)}
               </ul>
             </div>
 
@@ -129,24 +135,11 @@ const Index = () => {
             <div>
               <h4 className="text-sm font-bold mb-3 opacity-90">Find Us</h4>
               <div className="rounded-lg overflow-hidden border border-secondary-foreground/20 shadow-sm mb-2">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.2599!2d73.7997!3d18.6298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDM3JzQ3LjMiTiA3M8KwNDcnNTguOSJF!5e0!3m2!1sen!2sin!4v1234567890"
-                  width="100%"
-                  height="100"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Location"
-                  className="grayscale hover:grayscale-0 transition-all duration-300"
-                />
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3781.2599!2d73.7997!3d18.6298!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTjCsDM3JzQ3LjMiTiA3M8KwNDcnNTguOSJF!5e0!3m2!1sen!2sin!4v1234567890" width="100%" height="100" style={{
+                border: 0
+              }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Location" className="grayscale hover:grayscale-0 transition-all duration-300" />
               </div>
-              <Button 
-                variant="outline"
-                size="sm"
-                className="w-full text-xs border-secondary-foreground/30 hover:bg-secondary-foreground/10 h-8 group"
-                onClick={() => window.open('https://maps.google.com/?q=NIKHIL+NIWAS+Pune+PCMC+411035', '_blank')}
-              >
+              <Button variant="outline" size="sm" onClick={() => window.open('https://maps.google.com/?q=NIKHIL+NIWAS+Pune+PCMC+411035', '_blank')} className="w-full text-xs border-secondary-foreground/30 h-8 group bg-secondary">
                 <MapPin className="w-3 h-3 mr-1" />
                 Get Directions
                 <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
@@ -162,8 +155,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
